@@ -26,6 +26,18 @@ use App\Http\Controllers\Api\Customer\NotificationController as CustomerNotifica
 use App\Http\Controllers\Api\Customer\AccountController as CustomerAccountController;
 use App\Http\Controllers\Api\DomainSearchController;
 
+// Health check
+Route::get('/health', function () {
+    return response()->json([
+        'status' => 'success',
+        'message' => 'NUVEX API is running',
+        'application' => 'Laravel',
+        'version' => '11.x',
+        'environment' => app()->environment(),
+        'timestamp' => now()->toISOString(),
+    ]);
+});
+
 // Domain search (public)
 Route::get('/domain/search', [DomainSearchController::class, 'search']);
 Route::get('/domain/whois', [DomainSearchController::class, 'whois']);
