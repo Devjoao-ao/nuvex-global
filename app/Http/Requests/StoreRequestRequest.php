@@ -14,7 +14,7 @@ class StoreRequestRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type' => ['required', 'string', 'in:dns_change,ns_change,ip_change,transfer,renewal,other'],
+            'type' => ['required', 'string', 'in:dns_change,ns_change,ip_change,transfer,renewal,dns,nameserver,upgrade,support,cancellation,billing,technical,other'],
             'service_type' => ['nullable', 'string', 'max:50'],
             'service_id' => ['nullable', 'integer'],
             'data' => ['nullable', 'array'],
@@ -27,7 +27,7 @@ class StoreRequestRequest extends FormRequest
     {
         return [
             'type.required' => 'O tipo da solicitação é obrigatório.',
-            'type.in' => 'O tipo informado não é válido. Valores aceitos: dns_change, ns_change, ip_change, transfer, renewal, other.',
+            'type.in' => 'O tipo informado não é válido. Valores aceitos: dns_change, ns_change, ip_change, transfer, renewal, dns, nameserver, upgrade, support, cancellation, billing, technical, other.',
             'service_type.max' => 'O tipo do serviço não pode ter mais de 50 caracteres.',
             'service_id.integer' => 'O ID do serviço deve ser um número inteiro.',
             'data.array' => 'Os dados devem ser um array.',

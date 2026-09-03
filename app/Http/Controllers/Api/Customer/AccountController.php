@@ -11,6 +11,21 @@ use Illuminate\Support\Facades\Hash;
 
 class AccountController extends Controller
 {
+    public function getAccount(Request $request): JsonResponse
+    {
+        $user = $request->user()->load(['services.plan', 'orders', 'domains']);
+
+        return response()->json([
+            'user' => $user,
+            'stats' => [
+                'total_services' => $user->services->count(),
+                'active_services' => $user->services->where('status', 'active')->count(),
+                'total_orders' => $user->orders->count(),
+                'total_domains' => $user->domains->count(),
+            ],
+        ]);
+    }
+
     public function updateProfile(UpdateProfileRequest $request): JsonResponse
     {
         $user = $request->user();

@@ -78,6 +78,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/notifications/{notification}/read', [CustomerNotificationController::class, 'markRead']);
         Route::post('/notifications/read-all', [CustomerNotificationController::class, 'markAllRead']);
 
+        Route::get('/account', [CustomerAccountController::class, 'getAccount']);
         Route::put('/account/profile', [CustomerAccountController::class, 'updateProfile']);
         Route::put('/account/password', [CustomerAccountController::class, 'changePassword']);
     });

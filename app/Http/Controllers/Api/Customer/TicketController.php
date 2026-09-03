@@ -25,6 +25,8 @@ class TicketController extends Controller
 
     public function store(StoreTicketRequest $request): JsonResponse
     {
+        $description = $request->description ?? $request->message;
+
         $ticket = Ticket::create([
             'number' => 'TKT-' . strtoupper(uniqid()),
             'user_id' => $request->user()->id,
@@ -32,7 +34,7 @@ class TicketController extends Controller
             'category' => $request->category,
             'priority' => $request->priority ?? 'medium',
             'status' => 'open',
-            'description' => $request->description,
+            'description' => $description,
             'related_service_type' => $request->related_service_type,
             'related_service_id' => $request->related_service_id,
         ]);
@@ -41,7 +43,7 @@ class TicketController extends Controller
             'ticket_id' => $ticket->id,
             'user_id' => $request->user()->id,
             'author_type' => 'customer',
-            'message' => $request->description,
+            'message' => $description,
         ]);
 
         $ticket->load('messages.user');

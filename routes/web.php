@@ -3,5 +3,5 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/{any}', function () {
-    return view('app');
-})->where('any', '.*');
+    return response()->json(['message' => 'NUVEX GLOBAL API. Use /api/* endpoints.'], 200);
+})->where('any', '^(?!api).*');
